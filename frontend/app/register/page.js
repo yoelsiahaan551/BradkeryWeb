@@ -3,8 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
+  const router = useRouter();
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,13 +17,36 @@ export default function RegisterPage() {
     e.preventDefault();
     setError("");
 
-    if (!name || !email || !password) {
-      setError("Semua field wajib diisi.");
+    // Cek nama
+    if (!name) {
+      setError("Nama wajib diisi.");
       return;
     }
 
-    // TODO: ganti dengan call ke API/auth kamu (misal fetch ke /api/register)
-    console.log("Daftar dengan:", { name, email, password });
+    // Cek email
+    if (!email || !email.includes("@")) {
+      setError("Masukkan email yang valid.");
+      return;
+    }
+
+    // Cek password
+    if (!password) {
+      setError("Password wajib diisi.");
+      return;
+    }
+
+    // Simpan data user di browser
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        name: name,
+        email: email,
+        isLoggedIn: true,
+      })
+    );
+
+    // Langsung ke home
+    router.push("/home");
   }
 
   return (

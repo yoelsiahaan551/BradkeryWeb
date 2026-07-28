@@ -3,8 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -13,13 +16,29 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
 
-    if (!email || !password) {
-      setError("Email dan password wajib diisi.");
+    // Cek email
+    if (!email || !email.includes("@")) {
+      setError("Masukkan email yang valid.");
       return;
     }
 
-    // TODO: ganti dengan call ke API/auth kamu (misal fetch ke /api/login)
-    console.log("Login dengan:", { email, password });
+    // Cek password
+    if (!password) {
+      setError("Password wajib diisi.");
+      return;
+    }
+
+    // Simpan data login di browser
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        email: email,
+        isLoggedIn: true,
+      })
+    );
+
+    // Pindah ke home
+    router.push("/home");
   }
 
   return (
