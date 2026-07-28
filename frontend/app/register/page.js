@@ -120,12 +120,11 @@ export default function RegisterPage() {
           </p>
 
           <Link
-            href="/landingPage"
-            className="stagger-item mt-4 block text-center text-xs text-[#8A7660] transition-colors hover:text-[#B0492B]"
-            style={{ animationDelay: "0.9s" }}
-          >
-            ← Kembali ke Home
-          </Link>
+  href="/"
+  className="mt-4 block text-center text-xs text-[#8A7660] hover:text-[#B0492B]"
+>
+  ← Kembali ke Home
+</Link>
         </div>
       </div>
 
