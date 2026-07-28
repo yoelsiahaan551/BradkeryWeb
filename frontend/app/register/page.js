@@ -28,7 +28,7 @@ export default function RegisterPage() {
       {/* Full-bleed background image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/roti4.jpg"
+          src="/images/roti6.jpg"
           alt="Tungku Bakehouse"
           fill
           priority
